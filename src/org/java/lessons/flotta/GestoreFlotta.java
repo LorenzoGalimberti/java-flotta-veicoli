@@ -13,8 +13,22 @@ public class GestoreFlotta {
     }
 
     // metodi
+    public boolean verificaTargaDuplicata(String numeroTarga) {
+        for (Veicle veicolo : flotta) {
+            if (veicolo.getNumeroTarga().equalsIgnoreCase(numeroTarga)) {
+                return true; // Targa duplicata trovata
+            }
+        }
+        return false; // Targa non trovata
+    }
     public void aggiungiVeicolo(Veicle veicolo) {
-        flotta.add(veicolo);
+        String numeroTarga = veicolo.getNumeroTarga();
+        if (verificaTargaDuplicata(numeroTarga)) {
+            System.out.println("Errore: La targa " + numeroTarga + " è già presente nel sistema.");
+        } else {
+            flotta.add(veicolo);
+            System.out.println("Veicolo aggiunto alla flotta.");
+        }
     }
 
     public int conteggioVeicoli(String tipo) {
